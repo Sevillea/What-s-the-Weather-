@@ -1,5 +1,4 @@
-var queryURL = 'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}'
-var APIkey = "8b5ebef5e27f399568c79c7b46e5d128"
+
 $(document).ready(renderCity());
 
 // GLOBAL VARIABLES 
@@ -12,12 +11,7 @@ const cities =[];
     event.preventDefault();
     if (searchInput === ""){
     console.log("Weather for Today is: " + searchInput)
-    $.ajax({
-        url: "8b5ebef5e27f399568c79c7b46e5d128",
-        method:"GET"
-    }) .then(function(response){
-        console.log(response);
-    });
+    
     searchInput = $("#city-search").val();
     storeCity(searchInput);
     renderCity();
@@ -32,11 +26,24 @@ const cities =[];
 
  }
 
- function renderCity(){
-    let cityDiv=$("#previous-city");
-    $(cityDiv).empty();
-    $.each(JSON.parse(localStorage.getItem("cities")), function(i, city){
-        let newCity = $("<li>" + city + "<li>");
-        newCity.addClass("list-item").appendTo(cityDiv);
-    })
- }
+//  function renderCity(){
+//     let cityDiv=$("#previous-city");
+//     $(cityDiv).empty();
+//     $.each(JSON.parse(localStorage.getItem("cities")), function(i, city){
+//         let newCity = $("<li>" + city + "<li>");
+//         newCity.addClass("list-item").appendTo(cityDiv);
+//     })
+//  }
+
+function WeatherResult(cityInput){
+    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}';
+    var APIkey = "21efe940b8d2ff3f05f5347e20721883";
+    $.ajax({
+        url: queryURL,
+        method:"GET"
+    }) .then(function(response){
+        console.log(response);
+        findMeWeather(response);
+    });
+}
+
