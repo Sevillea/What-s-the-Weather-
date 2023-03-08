@@ -10,7 +10,6 @@ const cities =[];
 
  $(searchBtn).on("click", (event) => {
     event.preventDefault();
-    searchInput = $("#city-search").val();
     if (searchInput === ""){
     console.log("Weather for Today is: " + searchInput);
     $.ajax({
@@ -19,7 +18,12 @@ const cities =[];
     }) .then(function(event){
         console.log(response);
     });
-
+    searchInput = $("#city-search").val();
+    storeCity(cityInput);
+    renderCity();
+    WeatherResult(cityInput);
+    WeatherResultFuture(cityInput);
+    
     
   
  }});
