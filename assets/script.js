@@ -47,3 +47,9 @@ function WeatherResult(cityInput){
     });
 }
 
+$(document).on("click", ".list-group-item", function (event) {
+    $("#current-weather-card").empty();
+    $("#forecast-future").empty();
+    WeatherResult(event.target.innerHTML);
+    WeatherResultFuture(event.target.innerHTML);
+  });
