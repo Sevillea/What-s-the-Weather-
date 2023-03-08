@@ -11,25 +11,32 @@ const cities =[];
  $(searchBtn).on("click", (event) => {
     event.preventDefault();
     if (searchInput === ""){
-    console.log("Weather for Today is: " + searchInput);
+    console.log("Weather for Today is: " + searchInput)
     $.ajax({
         url: "8b5ebef5e27f399568c79c7b46e5d128",
         method:"GET"
-    }) .then(function(event){
+    }) .then(function(response){
         console.log(response);
     });
     searchInput = $("#city-search").val();
-    storeCity(cityInput);
+    storeCity(searchInput);
     renderCity();
-    WeatherResult(cityInput);
-    WeatherResultFuture(cityInput);
+    WeatherResult(searchInput);
+    WeatherResultFuture(searchInput);
     
-    
-  
  }});
 
  function storeCity(cityInput) {
     cities.push(cityInput);
     localStorage.setItem("cities", JSON.stringify([...cities]));
 
+ }
+
+ function renderCity(){
+    let cityDiv=$("#previous-city");
+    $(cityDiv).empty();
+    $.each(JSON.parse(localStorage.getItem("cities")), function(i, city){
+        let newCity = $("<li>" + city + "<li>");
+        newCity.addClass("list-item").appendTo(cityDiv);
+    })
  }
