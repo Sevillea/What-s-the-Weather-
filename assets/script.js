@@ -73,7 +73,52 @@ $(document).ready(function (){
         }
     }
 
-    
+    // API search:
+
+    function search(){
+        let queryURL = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}" + city;
+        let coords = [];
+
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+        }).then(function(response){
+            coords.push(response.coord.lat);
+            coords.push(response.coord.lon);
+            let cityName = response.name;
+            let cityCond = response.weather[0].description.toUpperCase();
+            let cityTemp = response.main.temp;
+            let cityHum = response.main.humidity;
+            let cityWind = response.wind.speed;
+            let icon = response.weather[0].icon;
+            $("#icon").html(
+              `<img src= "https://openweathermap.org/img/wn/10d@2x.png">`
+            );
+            $("#city-name").html(cityName + " " + "(" + NowMoment + ")");
+            $("#city-cond").text("Current Conditions: " + cityCond);
+            $("#temp").text("Current Temp (F): " + cityTemp.toFixed(1));
+            $("#humidity").text("Humidity: " + cityHum + "%");
+            $("#wind-speed").text("Wind Speed: " + cityWind + "mph");
+            $("#date1").text(day1);
+            $("#date2").text(day2);
+            $("#date3").text(day3);
+            $("#date4").text(day4);
+            $("#date5").text(day5);
+      
+            getUV(response.coord.lat, response.coord.lon);
+
+        }).fail(function(){
+            alert("Oops, could not retrieve data")
+        });
+        
+        function getUV(lat, lon){
+            $.ajax({
+                url:
+            })
+        }
+    }
+
+
 
 
 })
@@ -83,31 +128,31 @@ $(document).ready(function (){
 
 
 
-$(document).ready(renderCity());
+// $(document).ready(renderCity());
 
-// GLOBAL VARIABLES 
-const searchInput = "search-input";
-const searchBtn = $("#search-button");
+// // GLOBAL VARIABLES 
+// const searchInput = "search-input";
+// const searchBtn = $("#search-button");
 
 
- $(searchBtn).on("click", (event) => {
-    event.preventDefault();
-    if (searchInput === ""){
-    console.log("Weather for Today is: " + searchInput)
+//  $(searchBtn).on("click", (event) => {
+//     event.preventDefault();
+//     if (searchInput === ""){
+//     console.log("Weather for Today is: " + searchInput)
     
-    searchInput = $("#city-search").val();
-    storeCity(searchInput);
-    renderCity();
-    WeatherResult(searchInput);
-    WeatherResultFuture(searchInput);
+//     searchInput = $("#city-search").val();
+//     storeCity(searchInput);
+//     renderCity();
+//     WeatherResult(searchInput);
+//     WeatherResultFuture(searchInput);
     
- }});
+//  }});
 
- function storeCity(cityInput) {
-    cities.push(cityInput);
-    localStorage.setItem("cities", JSON.stringify([...cities]));
+//  function storeCity(cityInput) {
+//     cities.push(cityInput);
+//     localStorage.setItem("cities", JSON.stringify([...cities]));
 
- }
+ 
 
 //  function renderCity(){
 //     let cityDiv=$("#previous-city");
@@ -118,21 +163,7 @@ const searchBtn = $("#search-button");
 //     })
 //  }
 
-function WeatherResult(cityInput){
-    var queryURL = 'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}';
-    var APIkey = "21efe940b8d2ff3f05f5347e20721883";
-    $.ajax({
-        url: queryURL,
-        method:"GET"
-    }) .then(function(response){
-        console.log(response);
-        findMeWeather(response);
-    });
-}
-
-$(document).on("click", ".list-group-item", function (event) {
-    $("#current-weather-card").empty();
-    $("#forecast-future").empty();
-    WeatherResult(event.target.innerHTML);
-    WeatherResultFuture(event.target.innerHTML);
-  });
+// function WeatherResult(cityInput){
+    
+//     var APIkey = "21efe940b8d2ff3f05f5347e20721883";
+    

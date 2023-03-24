@@ -1,12 +1,28 @@
-#title {
-    color: #00ced1;
-    font-family: 'Times New Roman', Times, serif;
-  }
+#info-section {
+  padding-top: 15px;
+}
 
-  .container-fluid {
-    margin: 15px;
-    font-size: large;
-  }
+#weather-data {
+  background-color: #ddf0e4;
+}
+
+.current-city-data {
+  min-height: 300px;
+}
+
+.table-box {
+  background-color:#4b6584;
+}
+
+tr {
+  margin: 5px;
+}
+
+.card {
+  background-color: #a5b1c2;
+  margin: 3px;
+  min-height: 300px;
+}
   
   
   
