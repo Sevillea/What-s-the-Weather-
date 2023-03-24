@@ -14,6 +14,22 @@ $(document).ready(function (){
 
     let city;
     let cities;
+
+    // Getter from local storage for most recent city searched:
+
+    function loadMostRecent(){
+        let lastSearch = localStorage.getItem("mostRecent");
+        if (lastSearch) {
+            city = lastSearch;
+            searchBtn();
+        } 
+        else {
+            city = "London"
+            search();
+        }
+    }
+
+    loadMostRecent()
 })
 
 
