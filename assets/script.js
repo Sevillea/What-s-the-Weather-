@@ -52,6 +52,29 @@ $(document).ready(function (){
         listCities();
     });
 
+    // Save the cities searched to local storage:
+
+    function saveToLocalStorage(){
+        localStorage.setItem("mostRecent", city);
+        cities.push(city);
+        localStorage.setitem("cities", JSON.stringify(cities));
+    }
+
+    // Retrieve chosen city inputted by user:
+
+    function getCity(){
+        city = $("#city-input").val();
+        if (city && cities.includes(city) === false){
+            saveToLocalStorage();
+            return city;
+        }
+        else if (!city){
+            alert("Oops, that doesn't look like a city");
+        }
+    }
+
+    
+
 
 })
 
