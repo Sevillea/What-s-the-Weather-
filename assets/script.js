@@ -1,4 +1,3 @@
-
 $(document).ready(function (){
     let NowMoment = moment().format("l");
 
@@ -82,7 +81,7 @@ $(document).ready(function (){
         $.ajax({
             url: queryURL,
             method: "GET",
-        }).then(function(response){
+        }).then(function(response) {
             coords.push(response.coord.lat);
             coords.push(response.coord.lon);
             let cityName = response.name;
@@ -180,10 +179,8 @@ $(document).ready(function (){
             `<img src="https://openweathermap.org/img/wn/${icon5}10d@2x.png">`
             );
 
-
-
             });
-        }
+         }
     }
 
     // RENDER recently searched cities:
@@ -197,18 +194,22 @@ $(document).ready(function (){
 
     listCities();
 
+    // Event Handler for recently seached cties:
 
+    $(document).on("click", "td", (e) => {
+        e.preventDefault();
+        let listedCity = $(e.target).text();
+        city = listedCity;
+        search();
+    });
 
+    // Event Handler for clear btn:
 
-})
+    $("clr-btn").click(() => {
+        localStorage.removeItem("cities");
+        loadRecentCities();
+        listCities();
+    });
+});
 
-
-
-
-//     })
-//  }
-
-// function WeatherResult(cityInput){
-    
-//     var APIkey = "21efe940b8d2ff3f05f5347e20721883";
     
