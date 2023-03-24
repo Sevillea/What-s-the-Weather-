@@ -186,7 +186,16 @@ $(document).ready(function (){
         }
     }
 
-    // RENDER recently searched icities:
+    // RENDER recently searched cities:
+
+    function listCities(){
+        $("#cities").text("");
+        cities.forEach((city) =>{
+            $("cityList").prepend("<tr><td>" + city + "</td></tr>");
+        });
+    }
+
+    
 
 
 
